@@ -50,8 +50,9 @@ max_eps_steps = 10000
 episode_count = 2000
 
 for i in range(episode_count):
+
+    # relaunch TORCS every 3 episode because of the memory leak error
     if np.mod(i, 3) == 0:
-        # relaunch TORCS every 3 episode because of the memory leak error
         obs = env.reset(relaunch=True)
     else:
         obs = env.reset()
@@ -65,23 +66,24 @@ for i in range(episode_count):
         image = process_img(image) / 255
 
         pos = (0, 0)
+        #  a = "-90 -75 -60 -45 -30 -20 -15 -10 -5 0 5 10 15 20 30 45 60 75 90"
         w = coach.game.format_steer_angle(steer_angle)
         r = reward
 
         if coach.step > 1:
             coach.train_examples.append([coach.last_state, coach.last_pi, r, coach.last_a])
+            # get enough data to train the net
             if len(coach.train_examples) >= coach.train_interval:
                 # if len(coach.train_examples) <= coach.train_interval:
                 coach.game.train_net(coach.train_examples)
                 coach.train_examples = []
 
         # store current state waiting for next state to get reward
-
         state = np.reshape(image, (FLAGS.input_height, FLAGS.input_width, 1))
         coach.last_state = state
 
         coach.mcts = MCTS(coach.game, coach.avp_net)
-        ############
+        # 1 is tmp, pi is possibility
         pi = coach.mcts.get_action_prob(state, w, 1)
 
         action = np.argmax(pi)
