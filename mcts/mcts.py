@@ -28,6 +28,7 @@ class MCTS:
             self.search(s, level, img)
 
         counts = [self.Nsa[((s, 0), a)] if ((s, 0), a) in self.Nsa else 0 for a in range(self.game.action_num)]
+
         # the temperature parameter
         if tmp == 0:
             best_act = np.argmax(counts)
@@ -40,14 +41,19 @@ class MCTS:
         return probs
 
     def search(self, s, level, img):
+        # Es == 0 if it's not terminal node
+        # get_game_ended will return 0 if it's not terminal node
         if (s, level) not in self.Es:
             self.Es[(s, level)] = self.game.get_game_ended(level, img)
         if self.Es[(s, level)] != 0:
-            # terminal node 
+            # terminal node
+            # return value of avp_net.predict(img)
             return self.Es[(s, level)]
 
         if (s, level) not in self.Ps:
             # leaf node(expand and evaluate)
+            # v is the value of avp_net.predict(img)
+            # the possibility is store in Ps
             self.Ps[(s, level)], v = self.avp_net.predict(img)
             self.Ns[(s, level)] = 0
             return v
@@ -56,17 +62,21 @@ class MCTS:
         best_act = -1
 
         # select the best action according to the PUCT equation
+        # game.action_num = 11, 11 kinds of angle
         for a in range(self.game.action_num):
             if ((s, level), a) in self.Qsa:
                 r = self.Qsa[((s, level), a)] + FLAGS.cpuct * self.Ps[(s, level)][a] * \
                     math.sqrt(self.Ns[(s, level)]) / (1 + self.Nsa[((s, level), a)])
             else:
                 r = FLAGS.cpuct * self.Ps[(s, level)][a] * math.sqrt(self.Ns[(s, level)] + EPS)
+
             if r > cur_best:
                 best_act = a
                 cur_best = r
 
+        # a is the best action index
         a = best_act
+        # return vsp_net.predict(img, a)
         next_img = self.game.get_next_state(img, a)
 
         v = self.search(a, level + 1, next_img)
