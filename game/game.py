@@ -45,12 +45,13 @@ class Game:
             sample_index = np.random.choice(FLAGS.train_interval - 1,
                                             FLAGS.avp_batch_size)
 
-            state_batch = []
-            next_state_batch = []
-            a_batch = []
-            obs_batch = []
-            p_batch = []
-            v_batch = []
+            state_batch = [] # current state of car
+            next_state_batch = [] # next state of car
+            a_batch = [] # the action of car
+
+            obs_batch = [] # current state of car
+            p_batch = [] # possibility of car action
+            v_batch = [] # value of car action
 
             for i in range(FLAGS.avp_batch_size):
                 # coach.last_state, coach.last_pi, r, coach.last_a
