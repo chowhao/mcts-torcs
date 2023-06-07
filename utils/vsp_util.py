@@ -90,13 +90,14 @@ def conv_layer_with_bn(in_put, shape, train_phase, activation=True, name=None):
 
 def get_deconv_filter(f_shape):
     """
-      reference: https://github.com/MarvinTeichmann/tensorflow-fcn
+    reference: https://github.com/MarvinTeichmann/tensorflow-fcn
     """
     width = f_shape[0]
     height = f_shape[0]
     f = ceil(width / 2.0)
     c = (2 * f - 1 - f % 2) / (2.0 * f)
     bi_linear = np.zeros([f_shape[0], f_shape[1]])
+
     for x in range(width):
         for y in range(height):
             value = (1 - abs(x / f - c)) * (1 - abs(y / f - c))
