@@ -94,5 +94,5 @@ class MCTS:
             self.Nsa[((s, level), a)] = 1
 
         self.Ns[(s, level)] += 1
-        
+
         return v
