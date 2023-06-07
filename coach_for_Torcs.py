@@ -108,7 +108,9 @@ for i in range(episode_count):
             reward = -1
         else:
             reward = 0.1
-        print('eps', i, 'step', coach.step, 'r', r, 'action', a_t, 'pi', pi)
+        # print('eps', i, 'step', coach.step, 'r', r, 'action', a_t, 'pi', pi)
+        print("episode: ", i, "step: ", coach.step, "reward: ", r, "action: ", a_t, "pi: ", pi)
         if done:
-            print('reset！' * 10)
+            # print('reset！' * 10)
+            print("reset!" * 10)
             obs = env.reset()

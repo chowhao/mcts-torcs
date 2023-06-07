@@ -69,7 +69,8 @@ class Game:
 
             loss_vsp = self.vsp_net.learn(state_batch, a_batch, next_state_batch)
             loss_avp = self.avp_net.learn(p_batch, v_batch, obs_batch)
-            print('loss_vsp:', round(loss_vsp, 5), 'loss_avp:', round(loss_avp, 5))
+            # print('loss_vsp:', round(loss_vsp, 5), 'loss_avp:', round(loss_avp, 5))
+            print("loss_vsp: ", round(loss_vsp, 5), "loss_avp: ", round(loss_avp, 5))
 
     def save_ckpt(self):
         self.saver.save(self.sess, 'ckpt/model.ckpt')
