@@ -16,7 +16,7 @@ class MCTS:
         self.avp_net = avp_net
 
         self.Qsa = {}  # store Q values for (s, a)
-        self.Nsa = {}  # store visited times for edge s,a
+        self.Nsa = {}  # store visited times for (s, a)
         self.Ns = {}  # store visited times for state s
         # self.Ps = {}  # store initial policy for state s returned by avp network
         self.Ps = {}  # store possibility of state s returned by avp network
@@ -24,6 +24,7 @@ class MCTS:
 
     def get_action_prob(self, img, s, tmp=1):
 
+        # FLAGS.num_mcts_sim is the depth of search tree
         for i in range(FLAGS.num_mcts_sim):
             level = 0
             self.search(s, level, img)
@@ -31,6 +32,7 @@ class MCTS:
         counts = [self.Nsa[((s, 0), a)] if ((s, 0), a) in self.Nsa else 0 for a in range(self.game.action_num)]
 
         # the temperature parameter
+        # return the possibility of each action
         if tmp == 0:
             best_act = np.argmax(counts)
             probs = [0] * len(counts)
