@@ -32,8 +32,8 @@ class Game:
     def format_steer_angle(w):
         w = int((w + 1) / 0.2)
         # ???
-        if w == 10:
-            w = 9
+        # if w == 10:
+        #     w = 9
         return w
 
     def train_net(self, train_examples):
