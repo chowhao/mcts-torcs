@@ -4,7 +4,7 @@ FLAGS = tf.flags.FLAGS
 
 tf.flags.DEFINE_integer('action_num', 11, 'the number of action')
 # tf.flags.DEFINE_integer('train_interval', 1000, 'the train interval')
-tf.flags.DEFINE_integer('train_interval', 4, 'the train interval')
+tf.flags.DEFINE_integer('train_interval', 1024, 'the train interval')
 # tf.flags.DEFINE_integer('max_depth', 50, 'the max depth of search tree')
 tf.flags.DEFINE_integer('max_depth', 50, 'the max depth of search tree')
 
@@ -23,8 +23,8 @@ tf.flags.DEFINE_integer('input_channel', 1, 'the channel of input image')
 # for vsp network
 tf.flags.DEFINE_float('vsp_lr', 0.00001, 'the learning rate of vsp network')
 # tf.flags.DEFINE_integer('vsp_batch_size', 20, 'the batch size of vsp network')
-tf.flags.DEFINE_integer('vsp_batch_size', 4, 'the batch size of vsp network')
+tf.flags.DEFINE_integer('vsp_batch_size', 32, 'the batch size of vsp network')
 # for avp network
 tf.flags.DEFINE_float('avp_lr', 0.0001, 'the learning rate of avp network')
 # tf.flags.DEFINE_integer('avp_batch_size', 20, 'the batch size of avp network')
-tf.flags.DEFINE_integer('avp_batch_size', 4, 'the batch size of avp network')
+tf.flags.DEFINE_integer('avp_batch_size', 32, 'the batch size of avp network')
