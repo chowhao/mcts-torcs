@@ -14,8 +14,9 @@ class MCTS:
     def __init__(self, game, avp_net):
         self.game = game
         self.avp_net = avp_net
-        self.Qsa = {}  # store Q values for (s, a), avp_net
-        self.Nsa = {}  # store visited times for edge s,a, avp_net
+
+        self.Qsa = {}  # store Q values for (s, a)
+        self.Nsa = {}  # store visited times for edge s,a
         self.Ns = {}  # store visited times for state s
         # self.Ps = {}  # store initial policy for state s returned by avp network
         self.Ps = {}  # store possibility of state s returned by avp network
@@ -36,7 +37,7 @@ class MCTS:
             probs[best_act] = 1
             return probs
 
-        counts = [x ** (1. / tmp) for x in counts]
+        counts = [x ** (1.0 / tmp) for x in counts]
         probs = [x / float(sum(counts)) for x in counts]
         return probs
 
