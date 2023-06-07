@@ -82,7 +82,7 @@ class MCTS:
 
         v = self.search(a, level + 1, next_img)
 
-        # update Qsa and Nsa
+        # update Qsa and Nsa, BackPropagation
         if ((s, level), a) in self.Qsa:
             self.Qsa[((s, level), a)] = (self.Nsa[((s, level), a)] * self.Qsa[((s, level), a)] + v) / \
                                         (self.Nsa[((s, level), a)] + 1)
