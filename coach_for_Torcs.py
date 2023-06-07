@@ -19,20 +19,24 @@ from torcs.gym_torcs import TorcsEnv
 
 class Coach:
     def __init__(self, game, avp_net):
-        self.train_interval = FLAGS.train_interval
+        # self.train_interval = FLAGS.train_interval
         self.game = game
         self.avp_net = avp_net
         self.mcts = MCTS(self.game, self.avp_net)
+
+        # store training dataset
         self.train_examples = []
+        # 11 kinds of action
         self.action_num = FLAGS.action_num
+        self.train_interval = FLAGS.train_interval
+
         self.step = 0
-
         self.last_state = None
-
         self.last_pi = 0
         self.last_a = 0
 
 
+# session
 sess = tf.Session()
 avpNet = AvpNet(sess)
 vspNet = VspNet(sess)
@@ -40,13 +44,14 @@ sess.run(tf.global_variables_initializer())
 game_ = Game(sess, avpNet, vspNet)
 coach = Coach(game_, avpNet)
 
+# env
 env = TorcsEnv(vision=True, throttle=False)
-
 obs = env.reset()
+
 steer_angle = 0.0
 reward = 0.0
-# max_eps_steps = 4*1000
-max_eps_steps = 10000
+max_eps_steps = 4*1000
+# max_eps_steps = 10000
 episode_count = 2000
 
 for i in range(episode_count):
@@ -67,6 +72,7 @@ for i in range(episode_count):
 
         pos = (0, 0)
         #  a = "-90 -75 -60 -45 -30 -20 -15 -10 -5 0 5 10 15 20 30 45 60 75 90"
+        # w is action
         w = coach.game.format_steer_angle(steer_angle)
         r = reward
 
@@ -91,6 +97,7 @@ for i in range(episode_count):
         pi = np.array(pi)
         coach.last_a = action
         coach.last_pi = pi
+        # steer_angle is [-1, 1]
         steer_angle = -1.0 + action / (coach.action_num - 1) * 2.0
         a_t = np.zeros((1,))
         a_t[0] = steer_angle
