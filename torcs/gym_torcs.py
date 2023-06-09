@@ -2,7 +2,7 @@
 from gym import spaces
 # import numpy as np
 # from os import path
-import snakeoil_gym as snakeoil
+import torcs.snakeoil_gym as snakeoil
 import numpy as np
 import copy
 import collections as col
@@ -33,7 +33,7 @@ class TorcsEnv:
         else:
             os.system('torcs  -nofuel -nodamage -nolaptime &')
         time.sleep(0.5)
-        os.system('sh autostart.sh')
+        os.system('sh torcs/autostart.sh')
         time.sleep(0.5)
 
         """
@@ -207,7 +207,7 @@ class TorcsEnv:
         else:
             os.system('torcs -nofuel -nodamage -nolaptime &')
         time.sleep(0.5)
-        os.system('sh autostart.sh')
+        os.system('sh torcs/autostart.sh')
         time.sleep(0.5)
 
     def agent_to_torcs(self, u):

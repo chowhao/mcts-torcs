@@ -6,7 +6,7 @@ tf.flags.DEFINE_integer('action_num', 11, 'the number of action')
 # tf.flags.DEFINE_integer('train_interval', 1000, 'the train interval')
 tf.flags.DEFINE_integer('train_interval', 1024, 'the train interval')
 # tf.flags.DEFINE_integer('max_depth', 50, 'the max depth of search tree')
-# tf.flags.DEFINE_integer('max_depth', 50, 'the max depth of search tree')
+tf.flags.DEFINE_integer('max_depth', 16, 'the max depth of search tree')
 
 # tf.flags.DEFINE_float('gmma', 0.9, 'the discount rate')
 # tf.flags.DEFINE_float('tau', 1.0, 'the temperature parameter')
