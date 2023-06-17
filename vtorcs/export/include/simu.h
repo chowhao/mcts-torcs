@@ -1,1 +1,0 @@
-/opt/torcs/vtorcs/src/interfaces/simu.h

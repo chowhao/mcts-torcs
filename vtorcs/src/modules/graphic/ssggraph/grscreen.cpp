@@ -363,7 +363,7 @@ void cGrScreen::update(tSituation *s, float Fps)
 		mirrorCam->display ();
 		glViewport (scrx, scry, scrw, scrh);
 	}
-
+  
 
 	START_PROFILE("boardCam*");
 	boardCam->action();

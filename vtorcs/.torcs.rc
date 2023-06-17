@@ -1,2 +1,2 @@
-TORCS_BASE = /opt/torcs/vtorcs
-MAKE_DEFAULT = /opt/torcs/vtorcs/Make-default.mk
+TORCS_BASE = /home/naotoyoshida/intern2016-yoshida/vtorcs-RL-color
+MAKE_DEFAULT = /home/naotoyoshida/intern2016-yoshida/vtorcs-RL-color/Make-default.mk
