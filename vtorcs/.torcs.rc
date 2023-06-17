@@ -1,0 +1,2 @@
+TORCS_BASE = /opt/torcs/vtorcs
+MAKE_DEFAULT = /opt/torcs/vtorcs/Make-default.mk
